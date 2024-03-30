@@ -12,6 +12,24 @@ const frontendDirectory = "test_frontend";
 const frontend_entry = path.join("src", frontendDirectory, "src", "index.html");
 
 module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
+    ],
+  },
   target: "web",
   mode: isDevelopment ? "development" : "production",
   entry: {
